@@ -67,14 +67,7 @@ export default function SourceInfo() {
           </div>
         </div>
 
-        {/* Copyright qismi */}
-        <div className="mt-16 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[#1A1A1A]/40 text-[11px] font-medium">
-          <p>© 2026 BALANCE. Barcha huquqlar himoyalangan.</p>
-          <div className="flex gap-6 italic">
-            <span>O'zbekistonda ishlab chiqarilgan</span>
-            <span className="text-red-600/50 font-black">18+</span>
-          </div>
-        </div>
+     
       </div>
 
       {/* MODAL */}

@@ -117,7 +117,7 @@ export default function Purchase() {
           whileInView={{ opacity: 1, scale: 1 }}
           className="flex flex-col items-center text-center space-y-6 mb-16"
         >
-          <h2 className="text-[50px] md:text-[80px] font-black italic tracking-tighter leading-none">
+          <h2 className="text-[30px] md:text-[60px] font-black italic tracking-tighter leading-none">
             <span className="text-[#1A1A1A]">CARDIO</span>
             <span className="text-red-600">BALANCE</span>
           </h2>
@@ -151,16 +151,7 @@ export default function Purchase() {
           ].map((pill, i) => (
             <motion.div
               key={i}
-              animate={{
-                y: [0, -20, 0],
-                rotate: [0, 10, -10, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                delay: pill.delay,
-                ease: "easeInOut",
-              }}
+           
               className={`${pill.size} ${pill.color} rounded-full shadow-lg border border-white/50 ${pill.rotate}`}
             />
           ))}

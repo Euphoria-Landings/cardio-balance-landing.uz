@@ -1,0 +1,51 @@
+name: Deploy Cardio Balance
+
+on:
+  push:
+    branches: ["main", "master"]
+
+permissions:
+  contents: write
+  packages: write
+  actions: read
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, Linux, X64]
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build Project
+        run: npm run build
+
+      - name: Production Deploy
+        run: |
+          # Cardio Balance uchun target papka
+          TARGET_DIR="/home/user/Projects/Euphoria/lands/cardio-balance-landing.uz"
+          
+          # Papkani tayyorlash
+          mkdir -p $TARGET_DIR
+          
+          # Build natijasini tekshirish (out papkasi)
+          if [ -d "out" ]; then
+            rm -rf $TARGET_DIR/*
+            cp -r out/* $TARGET_DIR/
+            echo "✅ Cardio Balance muvaffaqiyatli deploy qilindi!"
+          else
+            echo "❌ Xato: 'out' papkasi topilmadi!"
+            exit 1
+          fi
