@@ -55,7 +55,7 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
     setFormData({ ...formData, phone: formatted });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const digitsOnly = formData.phone.replace(/\D/g, "");
 
@@ -74,16 +74,22 @@ export default function OrderModal({ isOpen, onClose }: OrderModalProps) {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             full_name: formData.name,
-            phone_number: `+${digitsOnly}`,
+            phone_number: `+${digitsOnly}`, // Backendga "+" bilan yuborish
             product_name: "Cardio Balance",
           }),
         }
       );
 
+      // --- STATUS KODLARINI TEKSHIRISH ---
       if (response.ok) {
         setStatus("success");
         setTimeout(() => onClose(), 4000);
+      } else if (response.status === 429) {
+        // --- LIMIT LOGIKASI (Too Many Requests) ---
+        setStatus("idle");
+        showNotice("Siz allaqachon ariza qoldirgansiz. Iltimos, 1 soatdan keyin qayta urinib ko'ring.");
       } else {
+        // 400 yoki boshqa server xatolari
         throw new Error();
       }
     } catch (error) {

@@ -5,13 +5,13 @@ export default function Gymnastics() {
   const gymCards = [
     {
       title: "vitamin",
-      subtitle: "BO'G'yetishmovchiligi",
+      subtitle: "yetishmovchiligi",
       imgSrc: "/vitamin.png",
       color: "from-red-50 to-red-100",
     },
     {
       title: "yurakning",
-      subtitle: "funksional",
+      subtitle: "funksional faoliyati",
       imgSrc: "/yurak.png",
       color: "from-gray-50 to-gray-100",
     },
